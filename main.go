@@ -16,11 +16,11 @@ func bro(w http.ResponseWriter ,r *http.Request ) {
 
 func main(){
   // create a new mux
-  // mux is essentionaly a router or http live multiplexer/server
+  // mux is essentionaly a router or http request multiplexer/server
 
   mux:= http.NewServeMux()
 
-  // to handle the root route with home function
+  // to handle the root/home path with home function
   mux.HandleFunc("/",home)
   // handle for /bro route using bro function
   mux.HandleFunc("/bro",bro)
@@ -28,7 +28,7 @@ func main(){
 
   log.Print("Starting server on port 4000")
 
-  // listen to listen to http live server/multiplexer aka mux
+  // listen to listen to http live server/request multiplexer aka mux
   err:=  http.ListenAndServe(":4000",mux)
   // if there is err log it
   log.Fatal(err)
