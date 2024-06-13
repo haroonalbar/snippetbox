@@ -7,11 +7,7 @@ import (
 )
 
 func home(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Boi"))
-}
-
-func bro(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Sup Bro!"))
+	w.Write([]byte("Sup brodi!"))
 }
 
 func main() {
