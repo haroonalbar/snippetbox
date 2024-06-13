@@ -7,19 +7,19 @@ import (
 )
 
 func handlerHome(w http.ResponseWriter, r *http.Request) {
-  if r.URL.Path != "/"{
-    http.NotFound(w,r)
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
 
-}
+	}
 	w.Write([]byte("Snippetbox home page."))
 }
 
-func handleSnippetView(w http.ResponseWriter, r *http.Request){
-  w.Write([]byte("Display a specific snippet..."))
+func handleSnippetView(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Display a specific snippet..."))
 }
 
-func handleSnippetCreate(w http.ResponseWriter, r *http.Request){
-  w.Write([]byte("Create a snippet..."))
+func handleSnippetCreate(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Create a snippet..."))
 }
 
 func main() {
@@ -28,7 +28,7 @@ func main() {
 	mux.HandleFunc("/snippet/view", handleSnippetView)
 	mux.HandleFunc("/snippet/create", handleSnippetCreate)
 
-  fmt.Println("Start server on port 4000")
+	fmt.Println("Start server on port 4000")
 	err := http.ListenAndServe(":4000", mux)
 	if err != nil {
 		log.Fatal(err)
