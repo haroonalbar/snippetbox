@@ -7,6 +7,10 @@ import (
 )
 
 func handlerHome(w http.ResponseWriter, r *http.Request) {
+  if r.URL.Path != "/"{
+    http.NotFound(w,r)
+
+}
 	w.Write([]byte("Snippetbox home page."))
 }
 
