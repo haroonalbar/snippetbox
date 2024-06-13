@@ -5,31 +5,20 @@ import (
 	"net/http"
 )
 
-// fucnction to handle home path
-func home(w http.ResponseWriter ,r *http.Request ) {
-  w.Write([]byte("Boi"))
+func home(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Boi"))
 }
 
-func bro(w http.ResponseWriter ,r *http.Request ) {
-  w.Write([]byte("Sup Bro!"))
+func bro(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Sup Bro!"))
 }
 
-func main(){
-  // create a new mux
-  // mux is essentionaly a router or http request multiplexer/server
+func main() {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", home)
 
-  mux:= http.NewServeMux()
-
-  // to handle the root/home path with home function
-  mux.HandleFunc("/",home)
-  // handle for /bro route using bro function
-  mux.HandleFunc("/bro",bro)
-  
-
-  log.Print("Starting server on port 4000")
-
-  // listen to listen to http live server/request multiplexer aka mux
-  err:=  http.ListenAndServe(":4000",mux)
-  // if there is err log it
-  log.Fatal(err)
+	err := http.ListenAndServe(":4000", mux)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
