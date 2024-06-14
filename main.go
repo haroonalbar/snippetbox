@@ -19,8 +19,7 @@ func handleSnippetView(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleSnippetCreate(w http.ResponseWriter, r *http.Request) {
-  // not allow any other methods other than POST
-	if r.Method != "POST" {
+	if r.Method != http.MethodPost {
 		w.Header().Set("Allowed", "POST")
     http.Error(w,"Method Not Allowed",http.StatusMethodNotAllowed)
 		return
