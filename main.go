@@ -9,7 +9,7 @@ import (
 func handlerHome(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
-    return
+		return
 	}
 	w.Write([]byte("Snippetbox home page."))
 }
@@ -19,6 +19,13 @@ func handleSnippetView(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleSnippetCreate(w http.ResponseWriter, r *http.Request) {
+  // not allow any other methods other than POST
+	if r.Method != "POST" {
+		w.Header().Set("Allowed", "POST")
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		w.Write([]byte("Method Not Allowed"))
+		return
+	}
 	w.Write([]byte("Create a snippet..."))
 }
 
