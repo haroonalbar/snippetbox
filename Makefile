@@ -1,5 +1,5 @@
 build:
-	@go build -o ./bin/snip
+	@go build -o ./bin/snip ./cmd/web
 
 run: build
 	@./bin/snip
