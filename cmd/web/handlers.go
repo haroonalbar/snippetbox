@@ -2,17 +2,31 @@ package main
 
 import (
 	"fmt"
+	"html/template"
+	"log"
 	"net/http"
-  "strconv"
+	"strconv"
 )
-
 
 func handlerHome(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
 		return
 	}
-	w.Write([]byte("Snippetbox home page."))
+
+	// parse template file to template set
+	ts, err := template.ParseFiles("./ui/html/pages/home.tmpl")
+	if err != nil {
+		log.Print(err.Error())
+    http.Error(w, "Internal Server Error: Parsing", http.StatusInternalServerError)
+		return
+	}
+
+	err = ts.Execute(w, nil)
+	if err != nil {
+		log.Print(err.Error())
+    http.Error(w, "Internal Server Error: Writing", http.StatusInternalServerError)
+	}
 }
 
 func handleSnippetView(w http.ResponseWriter, r *http.Request) {
@@ -23,7 +37,7 @@ func handleSnippetView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-  // formatted http.ResponseWriter
+	// formatted http.ResponseWriter
 	fmt.Fprintf(w, "View snipped of id: %d", id)
 }
 
