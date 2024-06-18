@@ -15,17 +15,17 @@ func handlerHome(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// parse template file to template set
-	ts, err := template.ParseFiles("./ui/html/pages/home.tmpl")
+	ts, err := template.ParseFiles("./ui/html/pages/home.tmpl.html")
 	if err != nil {
 		log.Print(err.Error())
-    http.Error(w, "Internal Server Error: Parsing", http.StatusInternalServerError)
+		http.Error(w, "Internal Server Error: Parsing", http.StatusInternalServerError)
 		return
 	}
 
 	err = ts.Execute(w, nil)
 	if err != nil {
 		log.Print(err.Error())
-    http.Error(w, "Internal Server Error: Writing", http.StatusInternalServerError)
+		http.Error(w, "Internal Server Error: Writing", http.StatusInternalServerError)
 	}
 }
 
