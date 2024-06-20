@@ -14,8 +14,12 @@ func handlerHome(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	files := []string{
+		"./ui/html/base.tmpl.html",
+		"./ui/html/pages/home.tmpl.html"}
+
 	// parse template file to template set
-	ts, err := template.ParseFiles("./ui/html/pages/home.tmpl.html")
+	ts, err := template.ParseFiles(files...)
 	if err != nil {
 		log.Print(err.Error())
 		http.Error(w, "Internal Server Error: Parsing", http.StatusInternalServerError)
@@ -30,7 +34,7 @@ func handlerHome(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleSnippetView(w http.ResponseWriter, r *http.Request) {
-	// extract id parameter and check it's postive number
+	// extract id parameter and check it's positive number
 	id, err := strconv.Atoi(r.URL.Query().Get("id"))
 	if err != nil || id < 1 {
 		http.NotFound(w, r)
