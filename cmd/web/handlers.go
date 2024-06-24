@@ -41,7 +41,6 @@ func handleSnippetView(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-
 	// formatted http.ResponseWriter
 	fmt.Fprintf(w, "View snipped of id: %d", id)
 }
