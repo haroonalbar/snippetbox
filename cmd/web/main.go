@@ -12,12 +12,12 @@ func main() {
 	// server files in ui/static
 	fileServer := http.FileServer(http.Dir("./ui/static"))
 
+	// handle file server also strip the prefix to get the correct path
+	mux.Handle("/static/", http.StripPrefix("/static/", fileServer))
+
 	mux.HandleFunc("/", handlerHome)
 	mux.HandleFunc("/snippet/view", handleSnippetView)
 	mux.HandleFunc("/snippet/create", handleSnippetCreate)
-
-	// handle file server also strip the prefix to get the correct path
-	mux.Handle("/static/", http.StripPrefix("/static/", fileServer))
 
 	fmt.Println("Start server on port 4000")
 	err := http.ListenAndServe(":4000", mux)
